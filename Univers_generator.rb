@@ -1,5 +1,9 @@
 require 'json'
 
+p "Lancement des réactueurs"
+p "Génération imminente de l'univers"
+p "Veuillez patienter..."
+
 # Liste des types avec leur intro
 types = [
   {
@@ -139,7 +143,16 @@ json = JSON.generate(data)
 
 p "json en cours de génération"
 
+
 # Enregistrement du JSON dans un fichier
 File.write('univers.json', json)
 
+# faire patienter l'utilisateur avec une barre de progression
+print "["
+42.times do
+  sleep 0.1
+  print "#"
+end
+print "]"
+puts " "
 p "json généré"
