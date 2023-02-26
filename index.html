@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>test laby</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="Maze_style.css">
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <h1>test laby</h1>
+
+  <!-- // form to change the size of the maze -->
+  <form id="maze_size">
+    <label for="maze_width">Width</label>
+    <input type="number" id="maze_width" name="maze_width" min="1" max="100" value="12">
+    <label for="maze_height">Height</label>
+    <input type="number" id="maze_height" name="maze_height" min="1" max="100" value="12">
+    <input type="submit" value="Change">
+  </form>
+
+
+  <div id="maze_container"><!-- --></div>
+
+  <!-- <script src="/maze-builder.js"></script> -->
+  <script src="Maze_constructor.js"></script>
+  <script src="Maze_fancy.js"></script>
+  <script src="Maze_display.js"></script>
+  <script>
+
+    // Maze and MazeGame are global variables
+    // push in makeMaze function by the form to change the size of the maze
+    // use maze_size to change the size of the maze
+    // use maze_container to display the maze
+    // use maze to get the maze object
+
+    var Maze, MazeGame;
+
+    const makeMaze = (id, width, height, speech = false) => {
+      Maze = new FancyMazeBuilder(width, height);
+      Maze.display(id);
+      MazeGame = new Mazing("maze");
+      if (speech) {
+        MazeGame.enableSpeech();
+      }
+    }
+
+    makeMaze("maze_container", 12, 12);
+
+  </script>
+
+</body>
+
+</html>

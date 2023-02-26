@@ -3,33 +3,33 @@
 
 class MazeBuilder {
 
-  constructor(width, height) {
+  constructor(width, height) { // width and height are in cells
 
-    this.width = width;
-    this.height = height;
+    this.width = width; // width in cells
+    this.height = height; // height in cells
 
-    this.cols = 2 * this.width + 1;
-    this.rows = 2 * this.height + 1;
+    this.cols = 2 * this.width + 1; // width in spaces
+    this.rows = 2 * this.height + 1; // height in spaces
 
-    this.maze = this.initArray([]);
+    this.maze = this.initArray([]); // initialize maze array
 
     // place initial walls
-    this.maze.forEach((row, r) => {
-      row.forEach((cell, c) => {
+    this.maze.forEach((row, r) => { // for each row
+      row.forEach((cell, c) => { // for each cell in row
         switch(r)
         {
-          case 0:
-          case this.rows - 1:
-            this.maze[r][c] = ["wall"];
+          case 0: // top row
+          case this.rows - 1: // bottom row
+            this.maze[r][c] = ["wall"]; // place wall
             break;
 
-          default:
-            if((r % 2) == 1) {
-              if((c == 0) || (c == this.cols - 1)) {
-                this.maze[r][c] = ["wall"];
+          default: // middle rows
+            if((r % 2) == 1) { // odd rows
+              if((c == 0) || (c == this.cols - 1)) { // left and right columns
+                this.maze[r][c] = ["wall"]; // place wall
               }
-            } else if(c % 2 == 0) {
-              this.maze[r][c] = ["wall"];
+            } else if(c % 2 == 0) { // even rows, even columns
+              this.maze[r][c] = ["wall"]; // place wall
             }
 
         }
@@ -37,8 +37,8 @@ class MazeBuilder {
 
       if(r == 0) {
         // place exit in top row
-        let doorPos = this.posToSpace(this.rand(1, this.width));
-        this.maze[r][doorPos] = ["door", "exit"];
+        let doorPos = this.posToSpace(this.rand(1, this.width)); // random position
+        this.maze[r][doorPos] = ["door", "exit"]; // place exit door
       }
 
       if(r == this.rows - 1) {
@@ -52,6 +52,8 @@ class MazeBuilder {
     // start partitioning
     this.partition(1, this.height - 1, 1, this.width - 1);
   }
+
+  // helper functions
 
   initArray(value) {
     return new Array(this.rows).fill().map(() => new Array(this.cols).fill(value));
@@ -85,7 +87,7 @@ class MazeBuilder {
     return array;
   }
 
-  partition(r1, r2, c1, c2) {
+  partition(r1, r2, c1, c2) { // recursive function to partition maze
     // create partition walls
     // ref: https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_division_method
 
